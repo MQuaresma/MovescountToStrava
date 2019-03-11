@@ -107,5 +107,5 @@ venv.bak/
 **/._*
 **/.DS_Store
 
-.debug/**
+**/.debug/**
 **/*.gpx

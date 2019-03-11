@@ -8,6 +8,7 @@ import strava
 def main():
     args, _ = getopt.getopt(sys.argv[1:], "d")
     args = dict(args) 
+
     if "-d" in args:
         print("Creating debug session..")
         session_cookie = movescount.generateDebugSessionCookie()
