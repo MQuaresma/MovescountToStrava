@@ -1,9 +1,4 @@
-#!/usr/bin/env python3
-
 import requests
-import sys, getopt
-from getpass import getpass
-import swagger_client
 
 metadata_dir = ".debug/"
 movescount_domain = "http://www.movescount.com"
@@ -42,31 +37,3 @@ def exportMove(cookies, move_id, exp_format = "gpx"):
         move_dump = open(move_id + "." + exp_format, "wb")
         move_dump.write(exp_move.content)
         move_dump.close()
-
-
-def uploadToStrava():
-    
-
-def main():
-    args, _ = getopt.getopt(sys.argv[1:], "d")
-    args = dict(args) 
-    if "-d" in args:
-        print("Creating debug session..")
-        session_cookie = generateDebugSessionCookie()
-    else:
-        session_cookie = generateSessionCookie()
-    
-    if getSession(session_cookie):
-        moves = getMoveIDs()
-        if len(moves) > 0:
-            for move_id in moves:
-                exportMove(session_cookie, move_id)
-            print("All moves exported")
-        else:
-            print("No moves to export")
-    else:
-        print("Exiting...")
-    
-
-if __name__ == "__main__":
-    main()
