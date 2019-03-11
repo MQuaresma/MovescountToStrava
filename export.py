@@ -3,7 +3,9 @@
 import requests
 import sys, getopt
 from getpass import getpass
+import swagger_client
 
+metadata_dir = ".debug/"
 movescount_domain = "http://www.movescount.com"
 
 def generateSessionCookie():
@@ -12,11 +14,10 @@ def generateSessionCookie():
     #TODO: RE cookie generation mechanism
     
 def generateDebugSessionCookie():
-    cookie_dir = "cookies/"
     cookies = {'MovesCountCookie':'', 'ASP.NET_SessionId':'', 'AWSELB':''}
-    cookies['MovesCountCookie'] = open(cookie_dir+"movescount_movecountcookie").read()
-    cookies['ASP.NET_SessionId'] = open(cookie_dir+"movescount_sessionid").read()
-    cookies['AWSELB'] = open(cookie_dir+"movescount_awselb").read()
+    cookies['MovesCountCookie'] = open(metadata_dir+"movescount_movecountcookie").read()
+    cookies['ASP.NET_SessionId'] = open(metadata_dir+"movescount_sessionid").read()
+    cookies['AWSELB'] = open(metadata_dir+"movescount_awselb").read()
     return cookies
 
 def getSession(cookies):
@@ -41,6 +42,10 @@ def exportMove(cookies, move_id, exp_format = "gpx"):
         move_dump = open(move_id + "." + exp_format, "wb")
         move_dump.write(exp_move.content)
         move_dump.close()
+
+
+def uploadToStrava():
+    
 
 def main():
     args, _ = getopt.getopt(sys.argv[1:], "d")
